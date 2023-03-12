@@ -327,10 +327,9 @@ def main():
     x.add_rows(directions)
     print("this is the direction system used")
     print(x)
-    a = Board(state)
+    a = Board()
     loop = True
-    #turn = input("Enter 'y' if you want the bot to go first\nEnter anything else to go first yourself:")
-    turn = 'y'
+    turn = input("Enter 'y' if you want the bot to go first\nEnter anything else to go first yourself:")
     botturn = False
     jump = False
     skip = False
