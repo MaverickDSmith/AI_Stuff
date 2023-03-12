@@ -41,8 +41,8 @@ class ThinkmoveReturn:
 
 def is_yours(board, color, x, y):
     if color:
-        c1 = 'y'
-        c2 = 'Y'
+        c1 = 'w'
+        c2 = 'W'
     else:
         c1 = 'b'
         c2 = 'B'
