@@ -58,7 +58,9 @@ def is_yours(board, color, x, y):
         print("there is an enemy piece here")
         return 2
 
-def decide(board, list):
+def decide(board, list, count):
+    gain_weight = 1
+    loss_weight = 1
     gains = []
     losses = []
     diff = []
@@ -70,9 +72,9 @@ def decide(board, list):
         losses.extend(list[i].loss)
         jumps.extend(list[i].jmparr)
     for i in range(len(gains)):
-        diff.append(int(gains[i]-losses[i]))
+        diff.append(((gains[i]) * gain_weight) * ((count-losses[i]) * loss_weight))
         curr = list[(math.floor(i/4))]
-        currtar = i%4
+        currtar = i % 4
         if board.checkmove(curr.x, curr.y, currtar).ret != 0:
             possible.append(True)
         else:
@@ -182,9 +184,11 @@ class Board:
         if w:
             color = 'w'
             ally = 'W'
+            count = self.w
         else:
             color = 'b'
             ally = 'B'
+            count = self.b
         moves = []
         gains = []
         losses = []
@@ -212,10 +216,10 @@ class Board:
                 else:
                     notjumps.append(i)
             if jumps:
-                deci = decide(self, jumps)
+                deci = decide(self, jumps, count)
                 return deci
             else:
-                deci = decide(self, notjumps)
+                deci = decide(self, notjumps, count)
                 return deci
         return ret
 
